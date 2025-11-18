@@ -19,6 +19,16 @@ public class AcorazadosTests
 
         acorazados.TieneDimensiones(11, 11).Should().BeFalse();
     }
+
+    [Fact]
+    public void Si_AgregoUnJugador_Debe_SerIgualAJugador1()
+    {
+        var acorazados = new Acorazados(10, 10);
+        
+        acorazados.AgregarJugador("jugador 1");
+        
+        acorazados.Jugadores.Should().Be("jugador 1");
+    }
 }
 
 public class Acorazados
@@ -29,6 +39,8 @@ public class Acorazados
     {
         _tablero = new string[x, y];
     }
+
+    public string Jugadores { get; set; }
 
     public bool TieneDimensiones(int x, int y)
     {
@@ -43,5 +55,10 @@ public class Acorazados
     private bool EsCantidadFilasIgualA(int x)
     {
         return _tablero.GetLength(0) == x;
+    }
+
+    public void AgregarJugador(string jugador)
+    {
+        throw new NotImplementedException();
     }
 }
