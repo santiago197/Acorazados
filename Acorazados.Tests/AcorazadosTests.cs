@@ -15,12 +15,12 @@ public class AcorazadosTests
 
 public class Acorazados
 {
-    public Acorazados(int i, int i1)
+    public Acorazados(int x, int y)
     {
         
     }
 
-    public bool TieneDimensiones(int i, int i1)
+    public bool TieneDimensiones(int x, int y)
     {
         return true;
     }
