@@ -11,7 +11,7 @@ public class AcorazadosTests
 
         acorazados.TieneDimensiones(10, 10).Should().BeTrue();
     }
-    
+
     [Fact]
     public void Si_InicializoUnTableroDe10x10_Debe_TenerDimensionesDe10X10()
     {
@@ -23,13 +23,15 @@ public class AcorazadosTests
 
 public class Acorazados
 {
+    private string[,] _tablero;
+
     public Acorazados(int x, int y)
     {
-        
+        _tablero = new string[x, y];
     }
 
     public bool TieneDimensiones(int x, int y)
     {
-        return true;
+        return _tablero.GetLength(0) == x && _tablero.GetLength(1) == y;
     }
 }
