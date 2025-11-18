@@ -32,6 +32,16 @@ public class Acorazados
 
     public bool TieneDimensiones(int x, int y)
     {
-        return _tablero.GetLength(0) == x && _tablero.GetLength(1) == y;
+        return EsCantidadFilasIgualA(x) && EsCantidadColumnasIgualA(y);
+    }
+
+    private bool EsCantidadColumnasIgualA(int y)
+    {
+        return _tablero.GetLength(1) == y;
+    }
+
+    private bool EsCantidadFilasIgualA(int x)
+    {
+        return _tablero.GetLength(0) == x;
     }
 }
