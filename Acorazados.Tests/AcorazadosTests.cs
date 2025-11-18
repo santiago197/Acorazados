@@ -40,7 +40,7 @@ public class Acorazados
         _tablero = new string[x, y];
     }
 
-    public List<Jugador> Jugadores { get; set; }
+    public List<Jugador> Jugadores { get; set; } = new();
 
 
     public bool TieneDimensiones(int x, int y)
@@ -68,6 +68,7 @@ public class Jugador
 {
     public Jugador(string jugador)
     {
+        Alias = jugador;
     }
 
     public string Alias { get; private set; }
