@@ -24,9 +24,9 @@ public class AcorazadosTests
     public void Si_AgregoUnJugador_Debe_SerIgualAJugador1()
     {
         var acorazados = new Acorazados(10, 10);
-        
+
         acorazados.AgregarJugador("jugador 1");
-        
+
         acorazados.Jugadores.Should().Be("jugador 1");
     }
 }
@@ -59,6 +59,6 @@ public class Acorazados
 
     public void AgregarJugador(string jugador)
     {
-        throw new NotImplementedException();
+        Jugadores = jugador;
     }
 }
