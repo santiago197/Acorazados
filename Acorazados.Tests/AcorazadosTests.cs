@@ -11,6 +11,14 @@ public class AcorazadosTests
 
         acorazados.TieneDimensiones(10, 10).Should().BeTrue();
     }
+    
+    [Fact]
+    public void Si_InicializoUnTableroDe10x10_Debe_TenerDimensionesDe10X10()
+    {
+        var acorazados = new Acorazados(10, 10);
+
+        acorazados.TieneDimensiones(11, 11).Should().BeFalse();
+    }
 }
 
 public class Acorazados
