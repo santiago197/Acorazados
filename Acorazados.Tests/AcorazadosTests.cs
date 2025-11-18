@@ -29,4 +29,15 @@ public class AcorazadosTests
 
         acorazados.Jugadores[0].Alias.Should().Be("jugador 1");
     }
+
+    [Fact]
+    public void Si_JugadorAgregaCanoneroEnLaPosicionX7Y2_Debe_EnTableroEnPosicionX7Y2TenerG()
+    {
+        var acorozados = new Acorazados(10, 10);
+        acorozados.AgregarJugador("jugador 1");
+
+        acorozados.Jugadores[0].AgregarCanonero(7, 2);
+
+        acorozados.ObtenerElemento(7, 2).Should().Be("g");
+    }
 }

@@ -8,4 +8,9 @@ public class Acorazados(int x, int y)
     private readonly string[,] _tablero = new string[x, y];
     private bool EsCantidadColumnasIgualA(int y) => _tablero.GetLength(1) == y;
     private bool EsCantidadFilasIgualA(int x) => _tablero.GetLength(0) == x;
+
+    public object ObtenerElemento(int i, int i1)
+    {
+        throw new NotImplementedException();
+    }
 }
