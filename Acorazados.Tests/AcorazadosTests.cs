@@ -21,13 +21,13 @@ public class AcorazadosTests
     }
 
     [Fact]
-    public void Si_AgregoUnJugador_Debe_SerIgualAJugador1()
+    public void Si_AgregoUnJugadorConElAliasJugador1_Debe_ExistirUnJugadorConElAliasJugador1()
     {
         var acorazados = new Acorazados(10, 10);
 
         acorazados.AgregarJugador("jugador 1");
 
-        acorazados.Jugadores.Should().Be("jugador 1");
+        acorazados.Jugadores[0].Alias.Should().Be("jugador 1");
     }
 }
 
@@ -40,7 +40,8 @@ public class Acorazados
         _tablero = new string[x, y];
     }
 
-    public string Jugadores { get; set; }
+    public List<Jugador> Jugadores { get; set; }
+
 
     public bool TieneDimensiones(int x, int y)
     {
@@ -59,6 +60,15 @@ public class Acorazados
 
     public void AgregarJugador(string jugador)
     {
-        Jugadores = jugador;
+        Jugadores.Add(new Jugador(jugador));
     }
+}
+
+public class Jugador
+{
+    public Jugador(string jugador)
+    {
+    }
+
+    public string Alias { get; private set; }
 }
