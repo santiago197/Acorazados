@@ -2,17 +2,13 @@
 
 public class Acorazados(int fila, int columna)
 {
-    public Dictionary<string, Jugador> Jugadores = new();
+    public readonly Dictionary<string, Jugador> Jugadores = new();
 
     public bool TieneDimensiones(int fila, int columna) =>
         EsCantidadFilasIgualA(fila) && EsCantidadColumnasIgualA(columna);
 
     public void AgregarJugador(string alias)
     {
-        // var jugador = new Jugador(alias)
-        // {
-        //     Manejador += OnAgregarCanonero
-        // };
         Jugadores.Add(alias, new Jugador(alias)
         {
             Tablero = new string[fila, columna]
@@ -30,7 +26,7 @@ public class Acorazados(int fila, int columna)
         {
             return Jugadores[aliasJugador].Tablero[fila, columna];
         }
-        
-        return "g";
+
+        return Nave.GunShip;
     }
 }

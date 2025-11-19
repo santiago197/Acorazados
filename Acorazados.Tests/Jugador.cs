@@ -25,7 +25,8 @@ public class Jugador(string alias)
 
 public enum Orientacion
 {
-    Horizontal
+    Horizontal,
+    Vertical
 }
 
 public static class Nave

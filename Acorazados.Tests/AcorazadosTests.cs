@@ -57,5 +57,19 @@ public class AcorazadosTests
         acorazados.ObtenerElemento(jugador1, 3, 4).Should().Be(Nave.Destroyer);
     }
     
+    [Fact]
+    public void Si_JugadorAgregaDestroyerEnLaFila7Columna5YOrientacionVertical_Debe_TableroOcuparDesde75A95_TenerD()
+    {
+        var acorazados = new Acorazados(10, 10);
+        var jugador1 = "jugador 1";
+        acorazados.AgregarJugador(jugador1);
+
+        acorazados.Jugadores[jugador1].AgregarDestroyer(7, 5, Orientacion.Vertical);
+
+        acorazados.ObtenerElemento(jugador1, 7, 5).Should().Be(Nave.Destroyer);
+        acorazados.ObtenerElemento(jugador1, 8, 5).Should().Be(Nave.Destroyer);
+        acorazados.ObtenerElemento(jugador1, 9, 5).Should().Be(Nave.Destroyer);
+    }
+    
 }
 
