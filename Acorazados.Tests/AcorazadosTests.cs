@@ -101,56 +101,20 @@ public class AcorazadosTests
         acorazados.ObtenerElemento(jugador1, 9, 2).Should().Be(Nave.Carrier);
         acorazados.ObtenerElemento(jugador1, 9, 3).Should().Be(Nave.Carrier);
     }
-
-    [Fact]
-    public void
-        Si_JugadorAgregaNaveDestroyerEnOrientacionHorizontalSuperandoElLimiteDelTablero_Debe_GenerarUnaExcepcion()
-    {
-        var acorazados = new Acorazados(10, 10);
-        var jugador1 = "jugador 1";
-        acorazados.AgregarJugador(jugador1);
-        var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(10, 10, Orientacion.Horizontal);
-        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage("Nave fuera del rango (Parameter 'fila')");
-    }
-
-    [Fact]
-    public void
-        Si_JugadorAgregaNaveDestroyerEnOrientacionHorizontalSuperandoElLimiteIzquierdoDelTablero_Debe_GenerarUnaExcepcion()
+    
+    [Theory]
+    [InlineData(9,-1,"columna")]
+    [InlineData(9,10,"columna")]
+    [InlineData(-1,10,"fila")]
+    [InlineData(10,10,"fila")]
+    public void Si_JugadorAgregaUnDestroyerFueraDeLosLimitesDelTablero_Debe_LanzarExcepcion(int fila,int columna, string parameter)
     {
         var acorazados = new Acorazados(10, 10);
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
         
-        var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(-1, 10, Orientacion.Horizontal);
+        var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(fila, columna, Orientacion.Vertical);
         caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage("Nave fuera del rango (Parameter 'fila')");
-    }
-
-
-    [Fact]
-    public void
-        Si_JugadorAgregaNaveDestroyerEnOrientacionVerticalSuperandoElLimiteInferiorDelTablero_Debe_GenerarUnaExcepcion()
-    {
-        var acorazados = new Acorazados(10, 10);
-        var jugador1 = "jugador 1";
-        acorazados.AgregarJugador(jugador1);
-        
-        var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(9, 10, Orientacion.Vertical);
-        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage("Nave fuera del rango (Parameter 'columna')");
-    }
-
-    [Fact]
-    public void
-        Si_JugadorAgregaNaveDestroyerEnOrientacionVerticalSuperandoElLimitSuperiorDelTablero_Debe_GenerarUnaExcepcion()
-    {
-        var acorazados = new Acorazados(10, 10);
-        var jugador1 = "jugador 1";
-        acorazados.AgregarJugador(jugador1);
-        
-        var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(9, -1, Orientacion.Vertical);
-        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage("Nave fuera del rango (Parameter 'columna')");
+            .WithMessage($"Nave fuera del rango (Parameter '{parameter}')");
     }
 }
