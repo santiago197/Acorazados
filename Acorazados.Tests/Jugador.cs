@@ -1,8 +1,16 @@
 ﻿namespace AcorazadosTests;
 
-public class Jugador(string alias)
+public class Jugador
 {
-    public string Alias { get; private set; } = alias;
+    private int _longitudColumnas;
+    private int _longitudFilas;
+
+    public Jugador(string alias)
+    {
+        Alias = alias;
+    }
+
+    public string Alias { get; private set; }
     public string[,] Tablero { get; init; }
 
     public string ObtenerElemento(int fila, int columna) => Tablero[fila, columna];
@@ -11,6 +19,7 @@ public class Jugador(string alias)
     {
         Tablero[fila, columna] = Nave.GunShip;
     }
+
 
     public void AgregarDestroyer(int fila, int columna, Orientacion orientacion)
     {
@@ -70,13 +79,22 @@ public class Jugador(string alias)
     private void LanzarExcepcionSiSuperaLimitesTablero(int fila, int columna, LongitudNave longitudNave,
         Orientacion orientacion)
     {
+        _longitudColumnas = Tablero.GetLength(1);
         var noTieneEspacioSuficiente =
-            columna + (int)longitudNave > Tablero.GetLength(1) && EsPosicionHorizontal(orientacion);
-        if (fila >= Tablero.GetLength(0) || fila < 0)
-            throw new ArgumentOutOfRangeException(nameof(fila), "Nave fuera del rango");
-        if (columna >= Tablero.GetLength(1) || columna < 0 || noTieneEspacioSuficiente)
-            throw new ArgumentOutOfRangeException(nameof(columna), "Nave fuera del rango");
+            columna + (int)longitudNave > _longitudColumnas && EsPosicionHorizontal(orientacion);
+        _longitudFilas = Tablero.GetLength(0);
+        var noTieneEspacioSuficienteEnFilas =
+            fila + (int)longitudNave > _longitudFilas && EsPosicionVertical(orientacion);
+
+
+        if ((fila >= _longitudFilas || fila < 0 && EsPosicionVertical(orientacion))
+            || noTieneEspacioSuficienteEnFilas)
+            throw new IndexOutOfRangeException("Nave fuera del rango");
+        if (columna >= _longitudColumnas || columna < 0 || noTieneEspacioSuficiente)
+            throw new IndexOutOfRangeException("Nave fuera del rango");
     }
+
+    private bool EsPosicionVertical(Orientacion orientacion) => orientacion == Orientacion.Vertical;
 }
 
 public enum LongitudNave

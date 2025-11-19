@@ -103,37 +103,35 @@ public class AcorazadosTests
     }
 
     [Theory]
-    [InlineData(9, -1, "columna")]
-    [InlineData(9, 10, "columna")]
-    [InlineData(-1, 10, "fila")]
-    [InlineData(10, 10, "fila")]
-    public void Si_JugadorAgregaUnDestroyerFueraDeLosLimitesDelTablero_Debe_LanzarExcepcion(int fila, int columna,
-        string parameter)
+    [InlineData(9, -1)]
+    [InlineData(9, 10)]
+    [InlineData(-1, 10)]
+    [InlineData(10, 10)]
+    public void Si_JugadorAgregaUnDestroyerFueraDeLosLimitesDelTablero_Debe_LanzarExcepcion(int fila, int columna)
     {
         var acorazados = new Acorazados(10, 10);
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
         var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(fila, columna, Orientacion.Vertical);
-        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage($"Nave fuera del rango (Parameter '{parameter}')");
+        caller.Should().ThrowExactly<IndexOutOfRangeException>()
+            .WithMessage($"Nave fuera del rango");
     }
 
     [Theory]
-    [InlineData(9, -1, "columna")]
-    [InlineData(9, 10, "columna")]
-    [InlineData(-1, 10, "fila")]
-    [InlineData(10, 10, "fila")]
-    public void Si_JugadorAgregaUnCarrierFueraDeLosLimitesDelTablero_Debe_LanzarExcepcion(int fila, int columna,
-        string parameter)
+    [InlineData(9, -1)]
+    [InlineData(9, 10)]
+    [InlineData(-1, 10)]
+    [InlineData(10, 10)]
+    public void Si_JugadorAgregaUnCarrierFueraDeLosLimitesDelTablero_Debe_LanzarExcepcion(int fila, int columna)
     {
         var acorazados = new Acorazados(10, 10);
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
         var caller = () => acorazados.Jugadores[jugador1].AgregarCarrier(fila, columna, Orientacion.Vertical);
-        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage($"Nave fuera del rango (Parameter '{parameter}')");
+        caller.Should().ThrowExactly<IndexOutOfRangeException>()
+            .WithMessage("Nave fuera del rango");
     }
 
     [Fact]
@@ -144,8 +142,8 @@ public class AcorazadosTests
         acorazados.AgregarJugador(jugador1);
 
         var caller = () => acorazados.Jugadores[jugador1].AgregarCarrier(9, 7, Orientacion.Horizontal);
-        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage("Nave fuera del rango (Parameter 'columna')");
+        caller.Should().ThrowExactly<IndexOutOfRangeException>()
+            .WithMessage("Nave fuera del rango");
     }
 
     [Fact]
@@ -156,7 +154,7 @@ public class AcorazadosTests
         acorazados.AgregarJugador(jugador1);
 
         var caller = () => acorazados.Jugadores[jugador1].AgregarCarrier(9, 7, Orientacion.Vertical);
-        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage("Nave fuera del rango (Parameter 'fila')");
+        caller.Should().ThrowExactly<IndexOutOfRangeException>()
+            .WithMessage("Nave fuera del rango");
     }
 }

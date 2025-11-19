@@ -1,6 +1,6 @@
 ﻿namespace AcorazadosTests;
 
-public class Acorazados(int fila, int columna)
+public class Acorazados
 {
     public readonly Dictionary<string, Jugador> Jugadores = new();
 
@@ -11,11 +11,21 @@ public class Acorazados(int fila, int columna)
     {
         Jugadores.Add(alias, new Jugador(alias)
         {
-            Tablero = new string[fila, columna]
+            Tablero = new string[_fila, _columna]
         });
     }
 
-    public string[,] _tablero = new string[fila, columna];
+    public string[,] _tablero;
+    private readonly int _fila;
+    private readonly int _columna;
+
+    public Acorazados(int fila, int columna)
+    {
+        _fila = fila;
+        _columna = columna;
+        _tablero = new string[fila, columna];
+    }
+
     private bool EsCantidadColumnasIgualA(int columna) => _tablero.GetLength(1) == columna;
     private bool EsCantidadFilasIgualA(int fila) => _tablero.GetLength(0) == fila;
 
