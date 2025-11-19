@@ -13,7 +13,7 @@ public class AcorazadosTests
     }
 
     [Fact]
-    public void Si_InicializoUnTableroDe10x10_Debe_TenerDimensionesDe10X10()
+    public void Si_InicializoUnTableroDe10x1o_Debe_TenerDimensionesDe10X10()
     {
         var acorazados = new Acorazados(10, 10);
 
@@ -21,7 +21,7 @@ public class AcorazadosTests
     }
 
     [Fact]
-    public void Si_AgregoUnJugadorConElAliasJugador1_Debe_ExistirUnJugadorConElAliasJugador1()
+    public void Si_AgregoUnJugador_Debe_ExistirUnJugadorConElAliasAsignado()
     {
         var acorazados = new Acorazados(10, 10);
 
@@ -31,13 +31,14 @@ public class AcorazadosTests
     }
 
     [Fact]
-    public void Si_JugadorAgregaCanoneroEnLaPosicionX7Y2_Debe_EnTableroEnPosicionX7Y2TenerG()
+    public void Si_JugadorAgregaCanoneroEnLaPosicionFila2Columna7_Debe_EnTableroEnPosicionX7Y2TenerG()
     {
         var acorozados = new Acorazados(10, 10);
         acorozados.AgregarJugador("jugador 1");
 
-        acorozados.Jugadores[0].AgregarCanonero(7, 2);
+        acorozados.Jugadores[0].AgregarCanonero(2, 7);
 
-        acorozados.ObtenerElemento(7, 2).Should().Be("g");
+        acorozados.ObtenerElemento(2, 7).Should().Be("g");
     }
+    
 }

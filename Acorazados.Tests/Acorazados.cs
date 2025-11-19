@@ -1,16 +1,31 @@
 ﻿namespace AcorazadosTests;
 
-public class Acorazados(int x, int y)
+public class Acorazados(int fila, int columna)
 {
     public List<Jugador> Jugadores { get; private set; } = [];
-    public bool TieneDimensiones(int x, int y) => EsCantidadFilasIgualA(x) && EsCantidadColumnasIgualA(y);
-    public void AgregarJugador(string alias) => Jugadores.Add(new Jugador(alias));
-    private readonly string[,] _tablero = new string[x, y];
-    private bool EsCantidadColumnasIgualA(int y) => _tablero.GetLength(1) == y;
-    private bool EsCantidadFilasIgualA(int x) => _tablero.GetLength(0) == x;
 
-    public object ObtenerElemento(int i, int i1)
+    public bool TieneDimensiones(int fila, int columna) =>
+        EsCantidadFilasIgualA(fila) && EsCantidadColumnasIgualA(columna);
+
+    public void AgregarJugador(string alias)
     {
-        throw new NotImplementedException();
+        // var jugador = new Jugador(alias)
+        // {
+        //     Manejador += OnAgregarCanonero
+        // };
+        Jugadores.Add(new Jugador(alias)
+        {
+            Tablero = new string[fila, columna]
+        });
+    }
+
+
+    public string[,] _tablero = new string[fila, columna];
+    private bool EsCantidadColumnasIgualA(int columna) => _tablero.GetLength(1) == columna;
+    private bool EsCantidadFilasIgualA(int fila) => _tablero.GetLength(0) == fila;
+
+    public string ObtenerElemento(int fila, int columna)
+    {
+        return "g";
     }
 }
