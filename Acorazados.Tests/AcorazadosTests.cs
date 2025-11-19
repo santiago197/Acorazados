@@ -149,7 +149,7 @@ public class AcorazadosTests
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
         
-        var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(9, 1, Orientacion.Vertical);
+        var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(9, -1, Orientacion.Vertical);
         caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
             .WithMessage("Nave fuera del rango (Parameter 'columna')");
     }
