@@ -86,4 +86,19 @@ public class AcorazadosTests
         acorazados.ObtenerElemento(jugador1, 6, 8).Should().Be(Nave.Carrier);
         acorazados.ObtenerElemento(jugador1, 7, 8).Should().Be(Nave.Carrier);
     }
+
+    [Fact]
+    public void Si_JugadorAgregaCarrierEnLaFila9Columna0YOrientacionHorizontal_Debe_TableroOcuparDesde90A93_TenerC()
+    {
+        var acorazados = new Acorazados(10, 10);
+        var jugador1 = "jugador 1";
+        acorazados.AgregarJugador(jugador1);
+
+        acorazados.Jugadores[jugador1].AgregarCarrier(9, 0, Orientacion.Horizontal);
+
+        acorazados.ObtenerElemento(jugador1, 9, 0).Should().Be(Nave.Carrier);
+        acorazados.ObtenerElemento(jugador1, 9, 1).Should().Be(Nave.Carrier);
+        acorazados.ObtenerElemento(jugador1, 9, 2).Should().Be(Nave.Carrier);
+        acorazados.ObtenerElemento(jugador1, 9, 3).Should().Be(Nave.Carrier);
+    }
 }

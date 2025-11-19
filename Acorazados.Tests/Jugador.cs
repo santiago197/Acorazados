@@ -27,8 +27,7 @@ public class Jugador(string alias)
         {
             if (nave == Nave.Destroyer || nave == Nave.Carrier)
             {
-                Tablero[fila, columna + 1] = nave;
-                Tablero[fila, columna + 2] = nave;
+                PosicionarColumna(nave, fila, columna);
                 if (nave == Nave.Carrier)
                 {
                     Tablero[fila, columna + 3] = nave;
@@ -39,14 +38,25 @@ public class Jugador(string alias)
         {
             if (nave == Nave.Destroyer || nave == Nave.Carrier)
             {
-                Tablero[fila + 1, columna] = nave;
-                Tablero[fila + 2, columna] = nave;
+                PosicionarFila(nave, fila, columna);
                 if (nave == Nave.Carrier)
                 {
                     Tablero[fila + 3, columna] = nave;
                 }
             }
         }
+    }
+
+    private void PosicionarFila(string nave, int fila, int columna)
+    {
+        Tablero[fila + 1, columna] = nave;
+        Tablero[fila + 2, columna] = nave;
+    }
+
+    private void PosicionarColumna(string nave, int fila, int columna)
+    {
+        Tablero[fila, columna + 1] = nave;
+        Tablero[fila, columna + 2] = nave;
     }
 
     public void AgregarCarrier(int fila, int columna, Orientacion orientacion)
