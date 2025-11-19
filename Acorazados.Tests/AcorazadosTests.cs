@@ -40,7 +40,7 @@ public class AcorazadosTests
 
         acorozados.Jugadores[jugador1].AgregarCanonero(2, 7);
 
-        acorozados.ObtenerElemento(2, 7).Should().Be("g");
+        acorozados.ObtenerElemento(jugador1, 2, 7).Should().Be("g");
     }
 
     [Fact]
@@ -52,9 +52,9 @@ public class AcorazadosTests
         
         acorazados.Jugadores[jugador1].AgregarDestroyer(3, 2, "horizontal");
         
-        acorazados.ObtenerElemento(3, 2).Should().Be("d");
-        acorazados.ObtenerElemento(3, 3).Should().Be("d");
-        acorazados.ObtenerElemento(3, 4).Should().Be("d");
+        acorazados.ObtenerElemento(jugador1,3, 2).Should().Be("d");
+        acorazados.ObtenerElemento(jugador1, 3, 3).Should().Be("d");
+        acorazados.ObtenerElemento(jugador1, 3, 4).Should().Be("d");
     }
     
 }

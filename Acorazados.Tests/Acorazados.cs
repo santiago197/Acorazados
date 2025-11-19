@@ -24,8 +24,13 @@ public class Acorazados(int fila, int columna)
     private bool EsCantidadColumnasIgualA(int columna) => _tablero.GetLength(1) == columna;
     private bool EsCantidadFilasIgualA(int fila) => _tablero.GetLength(0) == fila;
 
-    public string ObtenerElemento(int fila, int columna)
+    public string ObtenerElemento(string aliasJugador, int fila, int columna)
     {
+        if (Jugadores.ContainsKey(aliasJugador))
+        {
+            return Jugadores[aliasJugador].Tablero[fila, columna];
+        }
+        
         return "g";
     }
 }
