@@ -25,20 +25,36 @@ public class AcorazadosTests
     {
         var acorazados = new Acorazados(10, 10);
 
-        acorazados.AgregarJugador("jugador 1");
+        var jugador1 = "jugador 1";
+        acorazados.AgregarJugador(jugador1);
 
-        acorazados.Jugadores[0].Alias.Should().Be("jugador 1");
+        acorazados.Jugadores[jugador1].Alias.Should().Be(jugador1);
     }
 
     [Fact]
     public void Si_JugadorAgregaCanoneroEnLaPosicionFila2Columna7_Debe_EnTableroEnPosicionX7Y2TenerG()
     {
         var acorozados = new Acorazados(10, 10);
-        acorozados.AgregarJugador("jugador 1");
+        var jugador1 = "jugador 1";
+        acorozados.AgregarJugador(jugador1);
 
-        acorozados.Jugadores[0].AgregarCanonero(2, 7);
+        acorozados.Jugadores[jugador1].AgregarCanonero(2, 7);
 
         acorozados.ObtenerElemento(2, 7).Should().Be("g");
+    }
+
+    [Fact]
+    public void Si_JugadorAgregaDestroyerEnLaFila3Columna2YOrientacionHorizontal_Debe_TableroOcuparDesde32A34_TenerD()
+    {
+        var acorazados = new Acorazados(10, 10);
+        var jugador1 = "jugador 1";
+        acorazados.AgregarJugador(jugador1);
+        
+        acorazados.Jugadores[jugador1].AgregarDestroyer(3, 2, "horizontal");
+        
+        acorazados.ObtenerElemento(3, 2).Should().Be("d");
+        acorazados.ObtenerElemento(3, 3).Should().Be("d");
+        acorazados.ObtenerElemento(3, 4).Should().Be("d");
     }
     
 }
