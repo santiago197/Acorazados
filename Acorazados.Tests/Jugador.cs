@@ -36,4 +36,8 @@ public class Jugador(string alias)
         Tablero[fila, columna + 2] = Nave.Destroyer;
     }
 
+    public void AgregarCarrier(int i, int i1, Orientacion vertical)
+    {
+        throw new NotImplementedException();
+    }
 }

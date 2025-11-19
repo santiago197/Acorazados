@@ -79,7 +79,7 @@ public class AcorazadosTests
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
-        acorazados.Jugadores[jugador1].AgregarDestroyer(4, 8, Orientacion.Vertical);
+        acorazados.Jugadores[jugador1].AgregarCarrier(4, 8, Orientacion.Vertical);
 
         acorazados.ObtenerElemento(jugador1, 4, 8).Should().Be(Nave.Carrier);
         acorazados.ObtenerElemento(jugador1, 5, 8).Should().Be(Nave.Carrier);
