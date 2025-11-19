@@ -20,6 +20,12 @@ public class Jugador(string alias)
             Tablero[fila, columna + 1] = Nave.Destroyer;
             Tablero[fila, columna + 2] = Nave.Destroyer;
         }
+        else
+        {
+            Tablero[fila + 1, columna] = Nave.Destroyer;
+            Tablero[fila + 2, columna] = Nave.Destroyer;
+            
+        }
     }
 }
 
