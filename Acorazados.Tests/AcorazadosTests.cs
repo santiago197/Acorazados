@@ -145,6 +145,6 @@ public class AcorazadosTests
 
         var caller = () => acorazados.Jugadores[jugador1].AgregarCarrier(9, 7, Orientacion.Horizontal);
         caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage("Nave fuera del rango (Parameter 'fila')");
+            .WithMessage("Nave fuera del rango (Parameter 'columna')");
     }
 }
