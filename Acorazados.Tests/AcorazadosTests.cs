@@ -40,7 +40,7 @@ public class AcorazadosTests
 
         acorozados.Jugadores[jugador1].AgregarCanonero(2, 7);
 
-        acorozados.ObtenerElemento(jugador1, 2, 7).Should().Be("g");
+        acorozados.ObtenerElemento(jugador1, 2, 7).Should().Be(Nave.GunShip);
     }
 
     [Fact]
@@ -49,12 +49,13 @@ public class AcorazadosTests
         var acorazados = new Acorazados(10, 10);
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
-        
-        acorazados.Jugadores[jugador1].AgregarDestroyer(3, 2, "horizontal");
-        
-        acorazados.ObtenerElemento(jugador1,3, 2).Should().Be("d");
-        acorazados.ObtenerElemento(jugador1, 3, 3).Should().Be("d");
-        acorazados.ObtenerElemento(jugador1, 3, 4).Should().Be("d");
+
+        acorazados.Jugadores[jugador1].AgregarDestroyer(3, 2, Orientacion.Horizontal);
+
+        acorazados.ObtenerElemento(jugador1, 3, 2).Should().Be(Nave.Destroyer);
+        acorazados.ObtenerElemento(jugador1, 3, 3).Should().Be(Nave.Destroyer);
+        acorazados.ObtenerElemento(jugador1, 3, 4).Should().Be(Nave.Destroyer);
     }
     
 }
+

@@ -3,27 +3,33 @@
 public class Jugador(string alias)
 {
     public string Alias { get; private set; } = alias;
-    public string[,] Tablero { get; set; }
+    public string[,] Tablero { get; init; }
 
 
     public void AgregarCanonero(int fila, int columna)
     {
-        Tablero[fila, columna] = "g";
+        Tablero[fila, columna] = Nave.GunShip;
     }
 
-    public void AgregarDestroyer(int i, int i1, string horizontal)
+    public void AgregarDestroyer(int fila, int columna, Orientacion orientacion)
     {
-        Tablero[i, i1] = "d";
+        Tablero[fila, columna] = Nave.Destroyer;
 
-        if (horizontal == "horizontal")
+        if (orientacion == Orientacion.Horizontal)
         {
-            Tablero[i, i1 + 1] = "d";
-            Tablero[i, i1 + 2] = "d";
+            Tablero[fila, columna + 1] = Nave.Destroyer;
+            Tablero[fila, columna + 2] = Nave.Destroyer;
         }
     }
+}
 
-    public object ObtenerElemento(int i, int i1)
-    {
-        throw new NotImplementedException();
-    }
+public enum Orientacion
+{
+    Horizontal
+}
+
+public static class Nave
+{
+    public const string GunShip = "g";
+    public const string Destroyer = "d";
 }
