@@ -14,13 +14,13 @@ public class Jugador(string alias)
 
     public void AgregarDestroyer(int fila, int columna, Orientacion orientacion)
     {
-        LanzarExcepcionSiSuperaLimitesTablero(fila, columna);
+        LanzarExcepcionSiSuperaLimitesTablero(fila, columna, LongitudNave.Destroyer);
         PosicionarNave(Nave.Destroyer, orientacion, fila, columna);
     }
 
     public void AgregarCarrier(int fila, int columna, Orientacion orientacion)
     {
-        LanzarExcepcionSiSuperaLimitesTablero(fila, columna);
+        LanzarExcepcionSiSuperaLimitesTablero(fila, columna, LongitudNave.Carrier);
         PosicionarNave(Nave.Carrier, orientacion, fila, columna);
     }
 
@@ -67,11 +67,18 @@ public class Jugador(string alias)
         Tablero[fila, columna + 2] = nave;
     }
 
-    private void LanzarExcepcionSiSuperaLimitesTablero(int fila, int columna)
+    private void LanzarExcepcionSiSuperaLimitesTablero(int fila, int columna, LongitudNave longitudNave)
     {
-        if (fila >= Tablero.GetLength(0) || fila < 0)
+        var filaConLongitud = fila + (int)longitudNave;
+        if (fila >= Tablero.GetLength(0) || fila < 0 || filaConLongitud >= Tablero.GetLength(0))
             throw new ArgumentOutOfRangeException(nameof(fila), "Nave fuera del rango");
         if (columna >= Tablero.GetLength(1) || columna < 0)
             throw new ArgumentOutOfRangeException(nameof(columna), "Nave fuera del rango");
     }
+}
+
+public enum LongitudNave
+{
+    Carrier = 4,
+    Destroyer = 3
 }
