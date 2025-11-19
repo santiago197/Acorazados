@@ -38,6 +38,9 @@ public class Jugador(string alias)
 
     public void AgregarCarrier(int i, int i1, Orientacion vertical)
     {
-        throw new NotImplementedException();
+        Tablero[i, i1] = Nave.Carrier;
+        Tablero[i + 1, i1] = Nave.Carrier;
+        Tablero[i + 2, i1] = Nave.Carrier;
+        Tablero[i + 3, i1] = Nave.Carrier;
     }
 }
