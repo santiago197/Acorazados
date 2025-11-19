@@ -6,7 +6,7 @@ public class Jugador(string alias)
     public string[,] Tablero { get; init; }
 
     public string ObtenerElemento(int fila, int columna) => Tablero[fila, columna];
-    
+
     public void AgregarCanonero(int fila, int columna)
     {
         Tablero[fila, columna] = Nave.GunShip;
@@ -14,33 +14,43 @@ public class Jugador(string alias)
 
     public void AgregarDestroyer(int fila, int columna, Orientacion orientacion)
     {
-        if (EsPosicionHorizontal(orientacion))
-            PosicionarDestroyerHorizontal(fila, columna);
-        else
-            PosicionarDestroyerVertical(fila, columna);
+        PosicionarNave(Nave.Destroyer, orientacion, fila, columna);
     }
 
     private static bool EsPosicionHorizontal(Orientacion orientacion) => orientacion == Orientacion.Horizontal;
 
-    private void PosicionarDestroyerVertical(int fila, int columna)
+    private void PosicionarNave(string nave, Orientacion orientacion, int fila, int columna)
     {
-        Tablero[fila, columna] = Nave.Destroyer;
-        Tablero[fila + 1, columna] = Nave.Destroyer;
-        Tablero[fila + 2, columna] = Nave.Destroyer;
+        Tablero[fila, columna] = nave;
+
+        if (EsPosicionHorizontal(orientacion))
+        {
+            if (nave == Nave.Destroyer || nave == Nave.Carrier)
+            {
+                Tablero[fila, columna + 1] = nave;
+                Tablero[fila, columna + 2] = nave;
+                if (nave == Nave.Carrier)
+                {
+                    Tablero[fila, columna + 3] = nave;
+                }
+            }
+        }
+        else
+        {
+            if (nave == Nave.Destroyer || nave == Nave.Carrier)
+            {
+                Tablero[fila + 1, columna] = nave;
+                Tablero[fila + 2, columna] = nave;
+                if (nave == Nave.Carrier)
+                {
+                    Tablero[fila + 3, columna] = nave;
+                }
+            }
+        }
     }
 
-    private void PosicionarDestroyerHorizontal(int fila, int columna)
+    public void AgregarCarrier(int fila, int columna, Orientacion orientacion)
     {
-        Tablero[fila, columna] = Nave.Destroyer;
-        Tablero[fila, columna + 1] = Nave.Destroyer;
-        Tablero[fila, columna + 2] = Nave.Destroyer;
-    }
-
-    public void AgregarCarrier(int i, int i1, Orientacion vertical)
-    {
-        Tablero[i, i1] = Nave.Carrier;
-        Tablero[i + 1, i1] = Nave.Carrier;
-        Tablero[i + 2, i1] = Nave.Carrier;
-        Tablero[i + 3, i1] = Nave.Carrier;
+        PosicionarNave(Nave.Carrier, orientacion, fila, columna);
     }
 }
