@@ -56,7 +56,7 @@ public class AcorazadosTests
         acorazados.ObtenerElemento(jugador1, 3, 3).Should().Be(Nave.Destroyer);
         acorazados.ObtenerElemento(jugador1, 3, 4).Should().Be(Nave.Destroyer);
     }
-    
+
     [Fact]
     public void Si_JugadorAgregaDestroyerEnLaFila7Columna5YOrientacionVertical_Debe_TableroOcuparDesde75A95_TenerD()
     {
@@ -70,6 +70,20 @@ public class AcorazadosTests
         acorazados.ObtenerElemento(jugador1, 8, 5).Should().Be(Nave.Destroyer);
         acorazados.ObtenerElemento(jugador1, 9, 5).Should().Be(Nave.Destroyer);
     }
-    
-}
 
+
+    [Fact]
+    public void Si_JugadorAgregaCarrierEnLaFila4Columna8YOrientacionVertical_Debe_TableroOcuparDesde48A78_TenerC()
+    {
+        var acorazados = new Acorazados(10, 10);
+        var jugador1 = "jugador 1";
+        acorazados.AgregarJugador(jugador1);
+
+        acorazados.Jugadores[jugador1].AgregarDestroyer(4, 8, Orientacion.Vertical);
+
+        acorazados.ObtenerElemento(jugador1, 4, 8).Should().Be(Nave.Carrier);
+        acorazados.ObtenerElemento(jugador1, 5, 8).Should().Be(Nave.Carrier);
+        acorazados.ObtenerElemento(jugador1, 6, 8).Should().Be(Nave.Carrier);
+        acorazados.ObtenerElemento(jugador1, 7, 8).Should().Be(Nave.Carrier);
+    }
+}
