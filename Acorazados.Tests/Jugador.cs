@@ -10,4 +10,9 @@ public class Jugador(string alias)
     {
         Tablero[fila, columna] = "g";
     }
+
+    public void AgregarDestroyer(int i, int i1, string horizontal)
+    {
+        throw new NotImplementedException();
+    }
 }

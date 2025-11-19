@@ -2,7 +2,7 @@
 
 public class Acorazados(int fila, int columna)
 {
-    public List<Jugador> Jugadores { get; private set; } = [];
+    public Dictionary<string, Jugador> Jugadores = new();
 
     public bool TieneDimensiones(int fila, int columna) =>
         EsCantidadFilasIgualA(fila) && EsCantidadColumnasIgualA(columna);
@@ -13,7 +13,7 @@ public class Acorazados(int fila, int columna)
         // {
         //     Manejador += OnAgregarCanonero
         // };
-        Jugadores.Add(new Jugador(alias)
+        Jugadores.Add(alias, new Jugador(alias)
         {
             Tablero = new string[fila, columna]
         });
