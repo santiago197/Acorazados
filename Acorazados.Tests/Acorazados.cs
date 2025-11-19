@@ -15,18 +15,20 @@ public class Acorazados(int fila, int columna)
         });
     }
 
-
     public string[,] _tablero = new string[fila, columna];
     private bool EsCantidadColumnasIgualA(int columna) => _tablero.GetLength(1) == columna;
     private bool EsCantidadFilasIgualA(int fila) => _tablero.GetLength(0) == fila;
 
     public string ObtenerElemento(string aliasJugador, int fila, int columna)
     {
-        if (Jugadores.ContainsKey(aliasJugador))
-        {
-            return Jugadores[aliasJugador].Tablero[fila, columna];
-        }
+        if (ExisteJugador(aliasJugador))
+            return Jugadores[aliasJugador].ObtenerElemento(fila, columna);
 
         return Nave.GunShip;
+    }
+
+    private bool ExisteJugador(string aliasJugador)
+    {
+        return Jugadores.ContainsKey(aliasJugador);
     }
 }
