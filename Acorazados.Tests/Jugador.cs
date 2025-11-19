@@ -16,6 +16,9 @@ public class Jugador(string alias)
     {
         if(fila >= Tablero.GetLength(0) || fila < 0)
             throw new ArgumentOutOfRangeException(nameof(fila), "Nave fuera del rango");
+        if (columna >= Tablero.GetLength(1))
+            throw new ArgumentOutOfRangeException(nameof(columna), "Nave fuera del rango");
+                
         PosicionarNave(Nave.Destroyer, orientacion, fila, columna);
     }
 
