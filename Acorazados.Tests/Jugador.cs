@@ -14,6 +14,8 @@ public class Jugador(string alias)
 
     public void AgregarDestroyer(int fila, int columna, Orientacion orientacion)
     {
+        if(fila >= Tablero.GetLength(0))
+            throw new ArgumentOutOfRangeException(nameof(fila), "Nave fuera del rango");
         PosicionarNave(Nave.Destroyer, orientacion, fila, columna);
     }
 
