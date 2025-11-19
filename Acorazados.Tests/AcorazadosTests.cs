@@ -147,4 +147,16 @@ public class AcorazadosTests
         caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
             .WithMessage("Nave fuera del rango (Parameter 'columna')");
     }
+
+    [Fact]
+    public void Si_JugadorAgregaUnCarrierEnOrientacionVerticalSinTenerElEspacioSuficiente_Debe_LanzarExcepcion()
+    {
+        var acorazados = new Acorazados(10, 10);
+        var jugador1 = "jugador 1";
+        acorazados.AgregarJugador(jugador1);
+
+        var caller = () => acorazados.Jugadores[jugador1].AgregarCarrier(9, 7, Orientacion.Vertical);
+        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
+            .WithMessage("Nave fuera del rango (Parameter 'fila')");
+    }
 }
