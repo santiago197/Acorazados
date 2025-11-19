@@ -23,6 +23,7 @@ public class Jugador(string alias)
     {
         Tablero[fila, columna] = nave;
 
+
         if (EsPosicionHorizontal(orientacion))
         {
             if (nave == Nave.Destroyer || nave == Nave.Carrier)

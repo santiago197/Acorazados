@@ -101,4 +101,16 @@ public class AcorazadosTests
         acorazados.ObtenerElemento(jugador1, 9, 2).Should().Be(Nave.Carrier);
         acorazados.ObtenerElemento(jugador1, 9, 3).Should().Be(Nave.Carrier);
     }
+
+    [Fact]
+    public void
+        Si_JugadorAgregaNaveDestroyerEnOrientacionHorizontalSuperandoElLimiteDelTablero_Debe_GenerarUnaExcepcion()
+    {
+        var acorazados = new Acorazados(10, 10);
+        var jugador1 = "jugador 1";
+        acorazados.AgregarJugador(jugador1);
+        var caller = () => acorazados.Jugadores[jugador1].AgregarDestroyer(9, 9, Orientacion.Horizontal);
+        caller.Should().ThrowExactly<ArgumentOutOfRangeException>()
+            .WithMessage("Nave fuera del rango (Parameter 'columna')");
+    }
 }
