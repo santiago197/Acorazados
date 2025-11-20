@@ -30,6 +30,26 @@ public class Jugador
         PosicionarNave(new Carrier(), orientacion, fila, columna);
     }
 
+    public string ImprimirTablero()
+    {
+        var tablero = " |";
+        tablero = AgregarEncabezado(tablero);
+        tablero = AgregarSaltoDeLinea(tablero);
+
+        for (var posicionFila = 0; posicionFila < Tablero.GetLength(0); posicionFila++)
+        {
+            for (var posicionColumna = 0; posicionColumna < Tablero.GetLength(1); posicionColumna++)
+            {
+                if (posicionColumna == 0)
+                    tablero += $"{posicionFila}|";
+
+                tablero = AgregarElementoACasilla(posicionFila, posicionColumna, tablero);
+                tablero = AgregarSaltoDeLineaEnBorde(posicionColumna, tablero);
+            }
+        }
+
+        return tablero;
+    }
 
     private void PosicionarNave(INave nave, Orientacion orientacion, int fila, int columna)
     {
@@ -80,37 +100,35 @@ public class Jugador
         return fila + longitud > _longitudFilas && EsPosicionVertical(orientacion);
     }
 
-    public string ImprimirTablero()
+   
+
+    private string AgregarSaltoDeLineaEnBorde(int posicionColumna, string tablero)
     {
-        var tablero = " |0|1|2|3|4|5|6|7|8|9|\r\n";
+        if (posicionColumna == Tablero.GetLength(1) - 1)
+            tablero = AgregarSaltoDeLinea(tablero);
+        return tablero;
+    }
 
-        for (int posicionFila = 0; posicionFila < Tablero.GetLength(0 ); posicionFila++)
+    private string AgregarElementoACasilla(int posicionFila, int posicionColumna, string tablero)
+    {
+        var casilla = Tablero[posicionFila, posicionColumna];
+        tablero += (!string.IsNullOrEmpty(casilla) ? casilla : " ") + "|";
+        return tablero;
+    }
+    
+
+    private string AgregarEncabezado(string tablero)
+    {
+        for (int posicionColumna = 0; posicionColumna < Tablero.GetLength(1); posicionColumna++)
         {
-            for (int posicionColumna = 0; posicionColumna < Tablero.GetLength(1); posicionColumna++)
-            {
-                if (posicionColumna == 0)
-                {
-                    tablero += $"{posicionFila}|";
-                }
-
-                var s = Tablero[posicionFila, posicionColumna];
-                tablero += (!string.IsNullOrEmpty(s) ? s : " ") + "|";
-                if (posicionColumna == Tablero.GetLength(1) - 1)
-                    tablero += "\r\n";
-            }
+            tablero += $"{posicionColumna}|";
         }
+        return tablero;
+    }
 
-        return tablero.ToString();
-        // return " |0|1|2|3|4|5|6|7|8|9|\r\n" +
-        //        "0|g| | | | | | | | | |\r\n" +
-        //        "1| | | | | | | | | | |\r\n" +
-        //        "2| | | | | | | | | | |\r\n" +
-        //        "3| | | | | | | | | | |\r\n" +
-        //        "4| | | | | | | | | | |\r\n" +
-        //        "5| | | | | | | | | | |\r\n" +
-        //        "6| | | | | | | | | | |\r\n" +
-        //        "7| | | | | | | | | | |\r\n" +
-        //        "8| | | | | | | | | | |\r\n" +
-        //        "9| | | | | | | | | | |\r\n";
+    private string AgregarSaltoDeLinea(string tablero)
+    {
+        tablero += "\r\n";
+        return tablero;
     }
 }
