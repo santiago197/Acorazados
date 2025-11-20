@@ -1,4 +1,6 @@
-﻿namespace AcorazadosTests;
+﻿using System.Text;
+
+namespace AcorazadosTests;
 
 public class Jugador
 {
@@ -80,16 +82,35 @@ public class Jugador
 
     public string ImprimirTablero()
     {
-        return " |0|1|2|3|4|5|6|7|8|9|\r\n" +
-               "0|g| | | | | | | | | |\r\n" +
-               "1| | | | | | | | | | |\r\n" +
-               "2| | | | | | | | | | |\r\n" +
-               "3| | | | | | | | | | |\r\n" +
-               "4| | | | | | | | | | |\r\n" +
-               "5| | | | | | | | | | |\r\n" +
-               "6| | | | | | | | | | |\r\n" +
-               "7| | | | | | | | | | |\r\n" +
-               "8| | | | | | | | | | |\r\n" +
-               "9| | | | | | | | | | |\r\n";
+        var tablero = " |0|1|2|3|4|5|6|7|8|9|\r\n";
+
+        for (int posicionFila = 0; posicionFila < Tablero.GetLength(0 ); posicionFila++)
+        {
+            for (int posicionColumna = 0; posicionColumna < Tablero.GetLength(1); posicionColumna++)
+            {
+                if (posicionColumna == 0)
+                {
+                    tablero += $"{posicionFila}|";
+                }
+
+                var s = Tablero[posicionFila, posicionColumna];
+                tablero += (!string.IsNullOrEmpty(s) ? s : " ") + "|";
+                if (posicionColumna == Tablero.GetLength(1) - 1)
+                    tablero += "\r\n";
+            }
+        }
+
+        return tablero.ToString();
+        // return " |0|1|2|3|4|5|6|7|8|9|\r\n" +
+        //        "0|g| | | | | | | | | |\r\n" +
+        //        "1| | | | | | | | | | |\r\n" +
+        //        "2| | | | | | | | | | |\r\n" +
+        //        "3| | | | | | | | | | |\r\n" +
+        //        "4| | | | | | | | | | |\r\n" +
+        //        "5| | | | | | | | | | |\r\n" +
+        //        "6| | | | | | | | | | |\r\n" +
+        //        "7| | | | | | | | | | |\r\n" +
+        //        "8| | | | | | | | | | |\r\n" +
+        //        "9| | | | | | | | | | |\r\n";
     }
 }

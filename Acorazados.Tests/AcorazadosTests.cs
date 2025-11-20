@@ -159,7 +159,6 @@ public class AcorazadosTests
     {
         var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
-
         string expected = " |0|1|2|3|4|5|6|7|8|9|\r\n" +
                           "0|g| | | | | | | | | |\r\n" +
                           "1| | | | | | | | | | |\r\n" +
@@ -180,7 +179,8 @@ public class AcorazadosTests
     }
 
     [Fact]
-    public void Si_Jugador1AgregaUnDestroyerEnLaPosicion32ConOrientacionHorizontal_Debe_ImprimirTableroDestroyerDesde32A34()
+    public void
+        Si_Jugador1AgregaUnDestroyerEnLaPosicion32ConOrientacionHorizontal_Debe_ImprimirTableroDestroyerDesde32A34()
     {
         var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
@@ -195,13 +195,12 @@ public class AcorazadosTests
                           "7| | | | | | | | | | |\r\n" +
                           "8| | | | | | | | | | |\r\n" +
                           "9| | | | | | | | | | |\r\n";
-        
         acorazados.AgregarJugador(jugador1);
         acorazados.Jugadores[jugador1].AgregarGunShip(0, 0);
-        acorazados.Jugadores[jugador1].AgregarDestroyer(3,2, Orientacion.Horizontal);
+
+        acorazados.Jugadores[jugador1].AgregarDestroyer(3, 2, Orientacion.Horizontal);
+
 
         acorazados.Jugadores[jugador1].ImprimirTablero().Should().Be(expected);
     }
-    
-    
 }
