@@ -34,7 +34,7 @@ public class Acorazados
         if (ExisteJugador(aliasJugador))
             return Jugadores[aliasJugador].ObtenerElemento(fila, columna);
 
-        return Nave.GunShip;
+        return "";
     }
 
     private bool ExisteJugador(string aliasJugador)

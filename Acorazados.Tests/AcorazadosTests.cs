@@ -34,13 +34,13 @@ public class AcorazadosTests
     [Fact]
     public void Si_JugadorAgregaCanoneroEnLaPosicionFila2Columna7_Debe_EnTableroEnPosicionX7Y2TenerG()
     {
-        var acorozados = new Acorazados(10, 10);
+        var acorazados = new Acorazados(10, 10);
         var jugador1 = "jugador 1";
-        acorozados.AgregarJugador(jugador1);
+        acorazados.AgregarJugador(jugador1);
 
-        acorozados.Jugadores[jugador1].AgregarCanonero(2, 7);
+        acorazados.Jugadores[jugador1].AgregarGunShip(2, 7);
 
-        acorozados.ObtenerElemento(jugador1, 2, 7).Should().Be(Nave.GunShip);
+        acorazados.ObtenerElemento(jugador1, 2, 7).Should().Be(new GunShip().Valor);
     }
 
     [Fact]
@@ -52,9 +52,10 @@ public class AcorazadosTests
 
         acorazados.Jugadores[jugador1].AgregarDestroyer(3, 2, Orientacion.Horizontal);
 
-        acorazados.ObtenerElemento(jugador1, 3, 2).Should().Be(Nave.Destroyer);
-        acorazados.ObtenerElemento(jugador1, 3, 3).Should().Be(Nave.Destroyer);
-        acorazados.ObtenerElemento(jugador1, 3, 4).Should().Be(Nave.Destroyer);
+        var valorDestroyer = new Destroyer().Valor;
+        acorazados.ObtenerElemento(jugador1, 3, 2).Should().Be(valorDestroyer);
+        acorazados.ObtenerElemento(jugador1, 3, 3).Should().Be(valorDestroyer);
+        acorazados.ObtenerElemento(jugador1, 3, 4).Should().Be(valorDestroyer);
     }
 
     [Fact]
@@ -66,9 +67,10 @@ public class AcorazadosTests
 
         acorazados.Jugadores[jugador1].AgregarDestroyer(7, 5, Orientacion.Vertical);
 
-        acorazados.ObtenerElemento(jugador1, 7, 5).Should().Be(Nave.Destroyer);
-        acorazados.ObtenerElemento(jugador1, 8, 5).Should().Be(Nave.Destroyer);
-        acorazados.ObtenerElemento(jugador1, 9, 5).Should().Be(Nave.Destroyer);
+        var valorDestroyer = new Destroyer().Valor;
+        acorazados.ObtenerElemento(jugador1, 7, 5).Should().Be(valorDestroyer);
+        acorazados.ObtenerElemento(jugador1, 8, 5).Should().Be(valorDestroyer);
+        acorazados.ObtenerElemento(jugador1, 9, 5).Should().Be(valorDestroyer);
     }
 
 
@@ -81,10 +83,11 @@ public class AcorazadosTests
 
         acorazados.Jugadores[jugador1].AgregarCarrier(4, 8, Orientacion.Vertical);
 
-        acorazados.ObtenerElemento(jugador1, 4, 8).Should().Be(Nave.Carrier);
-        acorazados.ObtenerElemento(jugador1, 5, 8).Should().Be(Nave.Carrier);
-        acorazados.ObtenerElemento(jugador1, 6, 8).Should().Be(Nave.Carrier);
-        acorazados.ObtenerElemento(jugador1, 7, 8).Should().Be(Nave.Carrier);
+        var valorCarrier = new Carrier().Valor;
+        acorazados.ObtenerElemento(jugador1, 4, 8).Should().Be(valorCarrier);
+        acorazados.ObtenerElemento(jugador1, 5, 8).Should().Be(valorCarrier);
+        acorazados.ObtenerElemento(jugador1, 6, 8).Should().Be(valorCarrier);
+        acorazados.ObtenerElemento(jugador1, 7, 8).Should().Be(valorCarrier);
     }
 
     [Fact]
@@ -96,10 +99,11 @@ public class AcorazadosTests
 
         acorazados.Jugadores[jugador1].AgregarCarrier(9, 0, Orientacion.Horizontal);
 
-        acorazados.ObtenerElemento(jugador1, 9, 0).Should().Be(Nave.Carrier);
-        acorazados.ObtenerElemento(jugador1, 9, 1).Should().Be(Nave.Carrier);
-        acorazados.ObtenerElemento(jugador1, 9, 2).Should().Be(Nave.Carrier);
-        acorazados.ObtenerElemento(jugador1, 9, 3).Should().Be(Nave.Carrier);
+        var valorCarrier = new Carrier().Valor;
+        acorazados.ObtenerElemento(jugador1, 9, 0).Should().Be(valorCarrier);
+        acorazados.ObtenerElemento(jugador1, 9, 1).Should().Be(valorCarrier);
+        acorazados.ObtenerElemento(jugador1, 9, 2).Should().Be(valorCarrier);
+        acorazados.ObtenerElemento(jugador1, 9, 3).Should().Be(valorCarrier);
     }
 
     [Theory]
@@ -133,27 +137,18 @@ public class AcorazadosTests
         caller.Should().ThrowExactly<IndexOutOfRangeException>()
             .WithMessage("Nave fuera del rango");
     }
-
-    [Fact]
-    public void Si_JugadorAgregaUnCarrierEnOrientacionHorizontalSinTenerElEspacioSuficiente_Debe_LanzarExcepcion()
+    
+    
+    [Theory]
+    [InlineData(Orientacion.Vertical)]
+    [InlineData(Orientacion.Horizontal)]
+    public void Si_JugadorAgregaUnCarrierEnOrientacionIndicadaSinTenerElEspacioSuficiente_Debe_LanzarExcepcion(Orientacion orientacion)
     {
         var acorazados = new Acorazados(10, 10);
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
-        var caller = () => acorazados.Jugadores[jugador1].AgregarCarrier(9, 7, Orientacion.Horizontal);
-        caller.Should().ThrowExactly<IndexOutOfRangeException>()
-            .WithMessage("Nave fuera del rango");
-    }
-
-    [Fact]
-    public void Si_JugadorAgregaUnCarrierEnOrientacionVerticalSinTenerElEspacioSuficiente_Debe_LanzarExcepcion()
-    {
-        var acorazados = new Acorazados(10, 10);
-        var jugador1 = "jugador 1";
-        acorazados.AgregarJugador(jugador1);
-
-        var caller = () => acorazados.Jugadores[jugador1].AgregarCarrier(9, 7, Orientacion.Vertical);
+        var caller = () => acorazados.Jugadores[jugador1].AgregarCarrier(9, 7, orientacion);
         caller.Should().ThrowExactly<IndexOutOfRangeException>()
             .WithMessage("Nave fuera del rango");
     }

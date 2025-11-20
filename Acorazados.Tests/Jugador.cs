@@ -14,91 +14,67 @@ public class Jugador
     public string[,] Tablero { get; init; }
 
     public string ObtenerElemento(int fila, int columna) => Tablero[fila, columna];
-
-    public void AgregarCanonero(int fila, int columna)
-    {
-        Tablero[fila, columna] = Nave.GunShip;
-    }
-
+    public void AgregarGunShip(int fila, int columna) => Tablero[fila, columna] = new GunShip().Valor;
 
     public void AgregarDestroyer(int fila, int columna, Orientacion orientacion)
     {
-        LanzarExcepcionSiSuperaLimitesTablero(fila, columna, LongitudNave.Destroyer, orientacion);
-        PosicionarNave(Nave.Destroyer, orientacion, fila, columna);
+        LanzarExcepcionSiSuperaLimitesTablero(fila, columna, new Destroyer().Longitud, orientacion);
+        PosicionarNave(new Destroyer(), orientacion, fila, columna);
     }
 
     public void AgregarCarrier(int fila, int columna, Orientacion orientacion)
     {
-        LanzarExcepcionSiSuperaLimitesTablero(fila, columna, LongitudNave.Carrier, orientacion);
-        PosicionarNave(Nave.Carrier, orientacion, fila, columna);
+        LanzarExcepcionSiSuperaLimitesTablero(fila, columna, new Carrier().Longitud, orientacion);
+        PosicionarNave(new Carrier(), orientacion, fila, columna);
     }
 
-    private static bool EsPosicionHorizontal(Orientacion orientacion) => orientacion == Orientacion.Horizontal;
 
-    private void PosicionarNave(string nave, Orientacion orientacion, int fila, int columna)
+    private void PosicionarNave(INave nave, Orientacion orientacion, int fila, int columna)
     {
-        Tablero[fila, columna] = nave;
+        var longitud = nave.Longitud;
 
-
-        if (EsPosicionHorizontal(orientacion))
+        for (var posicion = 0; posicion < longitud; posicion++)
         {
-            if (nave == Nave.Destroyer || nave == Nave.Carrier)
-            {
-                PosicionarColumna(nave, fila, columna);
-                if (nave == Nave.Carrier)
-                {
-                    Tablero[fila, columna + 3] = nave;
-                }
-            }
-        }
-        else
-        {
-            if (nave == Nave.Destroyer || nave == Nave.Carrier)
-            {
-                PosicionarFila(nave, fila, columna);
-                if (nave == Nave.Carrier)
-                {
-                    Tablero[fila + 3, columna] = nave;
-                }
-            }
+            var siguienteFila = EsPosicionVertical(orientacion) ? fila + posicion : fila;
+            var siguienteColumna = EsPosicionHorizontal(orientacion) ? columna + posicion : columna;
+            Tablero[siguienteFila, siguienteColumna] = nave.Valor;
         }
     }
 
-    private void PosicionarFila(string nave, int fila, int columna)
-    {
-        Tablero[fila + 1, columna] = nave;
-        Tablero[fila + 2, columna] = nave;
-    }
 
-    private void PosicionarColumna(string nave, int fila, int columna)
-    {
-        Tablero[fila, columna + 1] = nave;
-        Tablero[fila, columna + 2] = nave;
-    }
-
-    private void LanzarExcepcionSiSuperaLimitesTablero(int fila, int columna, LongitudNave longitudNave,
+    private void LanzarExcepcionSiSuperaLimitesTablero(int fila, int columna, int longitud,
         Orientacion orientacion)
     {
-        _longitudColumnas = Tablero.GetLength(1);
-        var noTieneEspacioSuficiente =
-            columna + (int)longitudNave > _longitudColumnas && EsPosicionHorizontal(orientacion);
         _longitudFilas = Tablero.GetLength(0);
-        var noTieneEspacioSuficienteEnFilas =
-            fila + (int)longitudNave > _longitudFilas && EsPosicionVertical(orientacion);
+        _longitudColumnas = Tablero.GetLength(1);
 
-
-        if ((fila >= _longitudFilas || fila < 0 && EsPosicionVertical(orientacion))
-            || noTieneEspacioSuficienteEnFilas)
-            throw new IndexOutOfRangeException("Nave fuera del rango");
-        if (columna >= _longitudColumnas || columna < 0 || noTieneEspacioSuficiente)
+        if (EsNaveFueraRangoFila(fila, longitud, orientacion) ||
+            EsNaveFueraRangoColumna(columna, longitud, orientacion))
             throw new IndexOutOfRangeException("Nave fuera del rango");
     }
 
-    private bool EsPosicionVertical(Orientacion orientacion) => orientacion == Orientacion.Vertical;
-}
+    private bool EsPosicionHorizontal(Orientacion orientacion) => orientacion == Orientacion.Horizontal;
 
-public enum LongitudNave
-{
-    Carrier = 4,
-    Destroyer = 3
+    private bool EsPosicionVertical(Orientacion orientacion) => orientacion == Orientacion.Vertical;
+
+    private bool NoTieneEspacioSuficienteColumna(int columna, int longitud, Orientacion orientacion)
+    {
+        return columna + longitud > _longitudColumnas && EsPosicionHorizontal(orientacion);
+    }
+
+    private bool EsNaveFueraRangoColumna(int columna, int longitud, Orientacion orientacion)
+    {
+        return columna >= _longitudColumnas || columna < 0 ||
+               NoTieneEspacioSuficienteColumna(columna, longitud, orientacion);
+    }
+
+    private bool EsNaveFueraRangoFila(int fila, int longitud, Orientacion orientacion)
+    {
+        return fila >= _longitudFilas || fila < 0 || NoTieneEspacioSuficienteEnFilas(fila, longitud, orientacion);
+    }
+
+    private bool NoTieneEspacioSuficienteEnFilas(int fila, int longitud, Orientacion orientacion)
+    {
+        return fila + longitud > _longitudFilas && EsPosicionVertical(orientacion);
+    }
 }
