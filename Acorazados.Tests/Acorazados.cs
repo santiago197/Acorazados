@@ -15,15 +15,14 @@ public class Acorazados
         });
     }
 
-    public string[,] _tablero;
-    private readonly int _fila;
-    private readonly int _columna;
+    private string[,] _tablero;
+    private readonly int _fila = 10;
+    private readonly int _columna = 10;
+    public Dictionary<string, string[,]> Tableros { get; set; }
 
-    public Acorazados(int fila, int columna)
+    public Acorazados()
     {
-        _fila = fila;
-        _columna = columna;
-        _tablero = new string[fila, columna];
+        _tablero = new string[_fila, _columna];
     }
 
     private bool EsCantidadColumnasIgualA(int columna) => _tablero.GetLength(1) == columna;

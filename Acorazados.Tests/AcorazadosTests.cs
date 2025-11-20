@@ -7,7 +7,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_InicializoUnTablero_Debe_TenerDimensionesDe10X10()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
 
         acorazados.TieneDimensiones(10, 10).Should().BeTrue();
     }
@@ -15,7 +15,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_InicializoUnTableroDe10x1o_Debe_TenerDimensionesDe10X10()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
 
         acorazados.TieneDimensiones(11, 11).Should().BeFalse();
     }
@@ -23,7 +23,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_AgregoUnJugador_Debe_ExistirUnJugadorConElAliasAsignado()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
 
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
@@ -34,7 +34,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_JugadorAgregaCanoneroEnLaPosicionFila2Columna7_Debe_EnTableroEnPosicionX7Y2TenerG()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
@@ -46,7 +46,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_JugadorAgregaDestroyerEnLaFila3Columna2YOrientacionHorizontal_Debe_TableroOcuparDesde32A34_TenerD()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
@@ -61,7 +61,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_JugadorAgregaDestroyerEnLaFila7Columna5YOrientacionVertical_Debe_TableroOcuparDesde75A95_TenerD()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
@@ -77,7 +77,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_JugadorAgregaCarrierEnLaFila4Columna8YOrientacionVertical_Debe_TableroOcuparDesde48A78_TenerC()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
@@ -93,7 +93,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_JugadorAgregaCarrierEnLaFila9Columna0YOrientacionHorizontal_Debe_TableroOcuparDesde90A93_TenerC()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
@@ -113,7 +113,7 @@ public class AcorazadosTests
     [InlineData(10, 10)]
     public void Si_JugadorAgregaUnDestroyerFueraDeLosLimitesDelTablero_Debe_LanzarExcepcion(int fila, int columna)
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
@@ -129,7 +129,7 @@ public class AcorazadosTests
     [InlineData(10, 10)]
     public void Si_JugadorAgregaUnCarrierFueraDeLosLimitesDelTablero_Debe_LanzarExcepcion(int fila, int columna)
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
@@ -145,7 +145,7 @@ public class AcorazadosTests
     public void Si_JugadorAgregaUnCarrierEnOrientacionIndicadaSinTenerElEspacioSuficiente_Debe_LanzarExcepcion(
         Orientacion orientacion)
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
         acorazados.AgregarJugador(jugador1);
 
@@ -157,7 +157,7 @@ public class AcorazadosTests
     [Fact]
     public void Si_Jugador1AgregaUnGunshipEnLaPosicion00_Debe_ImprimirTableroGunShip()
     {
-        var acorazados = new Acorazados(10, 10);
+        var acorazados = new Acorazados();
         var jugador1 = "jugador 1";
 
         string expected = " |0|1|2|3|4|5|6|7|8|9|\r\n" +
