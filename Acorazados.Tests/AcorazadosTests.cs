@@ -137,12 +137,13 @@ public class AcorazadosTests
         caller.Should().ThrowExactly<IndexOutOfRangeException>()
             .WithMessage("Nave fuera del rango");
     }
-    
-    
+
+
     [Theory]
     [InlineData(Orientacion.Vertical)]
     [InlineData(Orientacion.Horizontal)]
-    public void Si_JugadorAgregaUnCarrierEnOrientacionIndicadaSinTenerElEspacioSuficiente_Debe_LanzarExcepcion(Orientacion orientacion)
+    public void Si_JugadorAgregaUnCarrierEnOrientacionIndicadaSinTenerElEspacioSuficiente_Debe_LanzarExcepcion(
+        Orientacion orientacion)
     {
         var acorazados = new Acorazados(10, 10);
         var jugador1 = "jugador 1";
@@ -154,23 +155,27 @@ public class AcorazadosTests
     }
 
     [Fact]
-    public void Si_Jugador1AgregaUnGunship_Debe_ImprimirTableroElGunShipEnFila0Columna0()
+    public void Si_Jugador1AgregaUnGunshipEnLaPosicion00_Debe_ImprimirTableroGunShip()
     {
-        var acorazados = new Acorazados(2, 2);
+        var acorazados = new Acorazados(10, 10);
         var jugador1 = "jugador 1";
-        var tableroEsperado = new string[2, 2]
-        {
-            { "g", "" },
-            { "", "" }
-        };
 
-        string expected = " |0|1|\r\n" +
-                          "0|g| |\r\n" +
-                          "1| | |\r\n";
-   
+        string expected = " |0|1|2|3|4|5|6|7|8|9|\r\n" +
+                          "0|g| | | | | | | | | |\r\n" +
+                          "1| | | | | | | | | | |\r\n" +
+                          "2| | | | | | | | | | |\r\n" +
+                          "3| | | | | | | | | | |\r\n" +
+                          "4| | | | | | | | | | |\r\n" +
+                          "5| | | | | | | | | | |\r\n" +
+                          "6| | | | | | | | | | |\r\n" +
+                          "7| | | | | | | | | | |\r\n" +
+                          "8| | | | | | | | | | |\r\n" +
+                          "9| | | | | | | | | | |\r\n";
+
+
         acorazados.AgregarJugador(jugador1);
         acorazados.Jugadores[jugador1].AgregarGunShip(0, 0);
 
-        acorazados.Jugadores[jugador1].ImprimirTablero().Should().Be(tableroEsperado);
+        acorazados.Jugadores[jugador1].ImprimirTablero().Should().Be(expected);
     }
 }

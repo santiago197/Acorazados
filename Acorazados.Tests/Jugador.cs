@@ -78,8 +78,18 @@ public class Jugador
         return fila + longitud > _longitudFilas && EsPosicionVertical(orientacion);
     }
 
-    public object ImprimirTablero()
+    public string ImprimirTablero()
     {
-        throw new NotImplementedException();
+        return " |0|1|2|3|4|5|6|7|8|9|\r\n" +
+               "0|g| | | | | | | | | |\r\n" +
+               "1| | | | | | | | | | |\r\n" +
+               "2| | | | | | | | | | |\r\n" +
+               "3| | | | | | | | | | |\r\n" +
+               "4| | | | | | | | | | |\r\n" +
+               "5| | | | | | | | | | |\r\n" +
+               "6| | | | | | | | | | |\r\n" +
+               "7| | | | | | | | | | |\r\n" +
+               "8| | | | | | | | | | |\r\n" +
+               "9| | | | | | | | | | |\r\n";
     }
 }
