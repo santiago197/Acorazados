@@ -77,4 +77,9 @@ public class Jugador
     {
         return fila + longitud > _longitudFilas && EsPosicionVertical(orientacion);
     }
+
+    public object ImprimirTablero()
+    {
+        throw new NotImplementedException();
+    }
 }

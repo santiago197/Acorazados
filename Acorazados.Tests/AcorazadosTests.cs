@@ -152,4 +152,25 @@ public class AcorazadosTests
         caller.Should().ThrowExactly<IndexOutOfRangeException>()
             .WithMessage("Nave fuera del rango");
     }
+
+    [Fact]
+    public void Si_Jugador1AgregaUnGunship_Debe_ImprimirTableroElGunShipEnFila0Columna0()
+    {
+        var acorazados = new Acorazados(2, 2);
+        var jugador1 = "jugador 1";
+        var tableroEsperado = new string[2, 2]
+        {
+            { "g", "" },
+            { "", "" }
+        };
+
+        string expected = " |0|1|\r\n" +
+                          "0|g| |\r\n" +
+                          "1| | |\r\n";
+   
+        acorazados.AgregarJugador(jugador1);
+        acorazados.Jugadores[jugador1].AgregarGunShip(0, 0);
+
+        acorazados.Jugadores[jugador1].ImprimirTablero().Should().Be(tableroEsperado);
+    }
 }
